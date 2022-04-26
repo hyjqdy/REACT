@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function doTask() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => resolve("first!!!"), 2000);
+            });
+        }
+
+        function doAnotherTask() {
+            return new Promise(function (resolve, reject) {
+                setTimeout(() => resolve("Second!!!"), 3000);
+            });
+        }
+        console.time("a");
+        Promise.all([doTask(), doAnotherTask()]).then(values => {
+            console.log(values[0]);
+            console.log(values[1]);
+            console.timeEnd("a");
+        })
+
+        console.log("End!!"); // non blocking
+
+    </script>
+</body>
+</html>
