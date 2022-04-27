@@ -393,3 +393,453 @@ pm2
 Day 2
 
 -----
+
+* JS engine, event loop, callback 
+* ES 6 / ES2015
+=> let and const
+=> arrow function [ lambda expression]
+=> Destructuring
+=> Promise, async and await
+
+* NodeJS
+=> V8 and libuv
+=> NPM, package.json
+=> CommonJS module system [ require(), module.exports]
+=> JS Unit Testing library [ Mocha], Chai.js asertion library
+
+
+JavaScript build tools
+* Automate tasks
+1) We may choose to write our code in TypeScript, ES6, CoffeeScript, DART, ...
+
+a.ts
+tsc a.ts ==> a.js [ executes on JS engine ]
+
+a.js
+babel a.js [ ES6] ==> a.js [ ES5]
+
+2) We may have to do static code analysis [ naming conventions, good practices]
+==> Linting
+eslint a.js
+
+3) Unit testing
+
+4) Minify and uglify code
+
+5) Browserify 
+	n number of js files in development
+
+	<script src="a.js"></script>
+	<script src="b.js"></script>
+	<script src="c.js"></script>
+	<script src="d.js"></script>
+
+	<link rel="styleheet" href="a.css" >
+	<link rel="styleheet" href="b.css" >
+ 
+ Each <script></script> tag will lead to Network call
+
+
+ bundle.js [ includes a.js, b.js, ...]
+ styles.css [ includes a.css, b.css, ...]
+
+ Build tools:
+ * Grunt
+ Grunt is a JavaScript task runner, a tool used to automatically perform frequent tasks such as minification, compilation, unit testing, and linting. 
+
+ * Gulp
+ * Webpack [ defacto build tool, embedded with many framework --> React, Angular, Vue]
+
+====================
+
+Step 1:
+webpackexample> npm init --y
+
+Step 2: install webpack dependecies
+
+npm i webpack webpack-cli webpack-dev-server -D
+
+OR 
+
+yarn add webpack webpack-cli webpack-dev-server -D
+
+npm scripts: "test" and "start" are predefined names for scripts
+
+npm test
+npm start
+
+any other script name we need to run it as :
+
+npm run dev
+npm run prod
+
+---
+
+Step 3:
+
+index.js 
+
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack --mode development",
+    "prod": "webpack --mode production",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+
+  npm run dev
+  or
+  npm run prod 
+
+  creates "main.js" in "dist" folder
+
+
+--
+Webpack Configuration file:
+
+webpack.config.js 
+
+* configure entry and outputfile 
+* plugins are configured
+
+==> html-webpack-plugin
+
+yarn add html-webpack-plugin
+Plugin that simplifies creation of HTML files to serve your bundles
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello Webpack World!!!</h1>
+</body>
+</html>
+
+* we need a plugin which automatically includes "js bundle in index.html"
+
+npm run dev 
+or 
+npm run prod 
+
+====
+
+Step 4:
+Handling CSS
+
+yarn add css-loader style-loader -D
+
+Step 5:
+
+using Babel with webpack 
+Babel is a transpiler / transcompiler
+ 
+===
+
+OOP in JS in ES5:
+
+1
+
+function Person(name, age) {
+	this.name = name;
+	this.age = age;
+}
+
+Person.prototype.getName = function() {
+	return this.name;
+}
+
+Person.prototype.getAge = function() {
+	return this.age;
+}
+
+
+let p1 = new Person("Tim", 22); // object 
+
+let p2 = new Person("Rani",18); // object
+
+p1.getName();
+
+2 JSON ==> JavaScript Object Notation
+
+let p1 = {"Name": "Tim", "age": 22};
+
+npm run dev
+asset main.js 26 KiB [emitted] (name: main)
+asset index.html 283 bytes [emitted]
+
+npm run prod
+asset main.js 4.7 KiB [emitted] [minimized] (name: main)
+asset index.html 252 bytes [emitted]
+
+
+=============
+
+ES6 Generator ==> along with Redux Saga
+
+============================================
+
+Rendering ==> convert data to presentation
+
+Server side rendering
+Presentation pages are generated on Server and sent to client
+* Servlet / JSP
+* ASP
+* ASP.NET
+* PHP
+* ExpressJS with Pug/JADE/EJS/Mustache/HandleBars templates
+
+
+HandleBars
+Server gets this data:
+{
+  people: [
+    "Yehuda Katz",
+    "Alan Johnson",
+    "Charles Jolley",
+  ],
+  [
+    "A",
+    "Johnson",
+    "Jolley",
+  ]
+}
+
+use template to convert to presentation:
+
+<ul class="people_list">
+  {{#each people}}
+    <li>{{this}}</li>
+  {{/each}}
+</ul>
+
+client [ Browser] gets:
+<ul class="people_list">
+    <li>Yehuda Katz</li>
+    <li>Alan Johnson</li>
+    <li>Charles Jolley</li>
+</ul>
+
+---
+
+Client Side Rendering:
+
+Server sends this data:
+ 
+{
+  "id": 1,
+  "name": "Leanne Graham",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "address": {
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Gwenborough",
+    "zipcode": "92998-3874",
+    "geo": {
+      "lat": "-37.3159",
+      "lng": "81.1496"
+    }
+  },
+  "phone": "1-770-736-8031 x56442",
+  "website": "hildegard.org",
+  "company": {
+    "name": "Romaguera-Crona",
+    "catchPhrase": "Multi-layered client-server neural-net",
+    "bs": "harness real-time e-markets"
+  }
+}
+
+Client will be different technologies/frameworks ,... to convert the data to presentation
+Mobile clients uses :Android/ Swift/Xamarin/ Cardova.. 
+
+Web Clients:
+* Plain old Vanilla code with XmlHttpRequest to make Ajax call get data and use DOM
+to create dynamic DOM elements
+
+var div = dom.createElement('div')
+div.appendChild(..);
+
+* jQuery
+
+var div = $("<div/>")
+
+* Templates
+combination of HTML and Interpolation code [ place holder for dynamic content]
+=> Handlebars
+=> Underscore
+=> Mustache
+=> jquery Template
+
+----
+
+SPA ==> Single Page Applications
+==> one HTML page [index.html] but many views
+* Data binding [one-way or two-way]
+* Re-rendering
+* Routes
+	http://server.com/products/mobiles
+	http://server.com/products/mobiles/iPhone
+	http://server.com/products/tv
+	http://server.com/products/tv/sony
+	http://server.com/products/mobiles/pixel
+	http://server.com/checkout
+* Secure routes	
+* Bookmark
+* Navigate between views
+
+JS frameworks and libraries:
+* Backbone library [ jquery or Handlebars or .. for view template]
+* AngularJS Framework [ complete solution]
+* React library [ view support, model ==> Redux, Context, ..]
+* Angular Framework
+* Vue
+
+MVC ==> Model View Controller
+
+Model ==> data
+View ==> Presentation
+controller ==> locus between Model and View
+
+=========================================================
+
+React.js
+A JavaScript library for building user interfaces
+
+JS Precompiler:
+Babel includes JSX processing.
+
+CDN:
+https://cdnjs.cloudflare.com/ajax/libs/react/18.1.0/umd/react.production.min.js
+
+https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.1.0/umd/react-dom.production.min.js
+
+============
+
+https://github.com/chentsulin/awesome-react-renderer
+
+============================================================
+
+React Reconcillation
+Reconciliation is the process through which React updates the Browser DOM.
+
+const diffs = [
+	{
+		newNode: 1,
+		oldNode: "one",
+		index: 0
+	},
+	{
+		newNode: "three",
+		index: 2
+	}
+]
+
+diffs.forEach(diff => {
+	const newElemet = document.createElement(diff.newNode, tagName);
+	if(diff.oldNode) {
+		document.replaceChild(diff.newElemet, diff.index)
+	} else {
+		document.appendChild(diff.newElement)
+	}
+}
+});
+....
+
+
+React.createElement("ul", {style:{'color': 'red'}}, React.createElement("li",null,"One"), React.createElement("li",null,"two"));
+
+
+Functional Components and Class components similifies way we create react elements
+
+Functional Components:
+
+function Welcome() {
+  return <div>
+    <h1>Welcome to React</h1>
+    <h3>Virtual Classroom</h3>
+   </div>
+}
+
+ReactDOM.render(<Welcome/>, document.getElementById("app"));
+
+
+returned value of functional compoments is JSX [ JavaScript and XML ]
+Babel converts this into React.createElement
+
+---
+
+props ==> mechanism using which a parent passes data to child component
+
+function Welcome(props) {
+  return <div className="my">
+    <h1>{props.title}</h1>
+    <h3>{props.location}</h3>
+   </div>
+}
+
+ReactDOM.render(<Welcome title="Welcome to ReactJS" location="Virtual"/>, document.getElementById("app"));
+
+===
+
+function Welcome({title, location}) {
+  return <div className="my">
+    <h1>{title}</h1>
+    <h3>{location}</h3>
+   </div>
+}
+
+ReactDOM.render(<Welcome title="Welcome to ReactJS" location="Virtual"/>, document.getElementById("app"));
+
+======
+
+
+var data = [
+{"id":1,"name":"iPhone","price":124447.44,"category" : "mobile"},
+{"id":2,"name":"Onida","price":4444.44,"category" : "tv"},
+{"id":3,"name":"OnePlus 6","price":98444.44,"category" : "mobile"},
+{"id":4,"name":"HDMI connector","price":2444.00,"category" : "computer"},
+{"id":5,"name":"Samsung","price":68000.00,"category" : "tv"}];
+
+function ProductList({products}) {
+  return <div>
+      {
+      products.map(product => <h1>{product.name}</h1>)
+    }
+   </div>
+}
+
+ReactDOM.render(<ProductList products={data} />, document.getElementById("app"));
+
+===========
+
+var data = [
+{"id":1,"name":"iPhone","price":124447.44,"category" : "mobile"},
+{"id":2,"name":"Onida","price":4444.44,"category" : "tv"},
+{"id":3,"name":"OnePlus 6","price":98444.44,"category" : "mobile"},
+{"id":4,"name":"HDMI connector","price":2444.00,"category" : "computer"},
+{"id":5,"name":"Samsung","price":68000.00,"category" : "tv"}];
+
+function ProductList({products}) {
+  return <div>
+      {
+      products.map(p => <Product product={p} />)
+    }
+   </div>
+}
+
+function Product({product}) {
+  return <div>
+    <h1>Name: {product.name} </h1>
+    <h2>Price : {product.price} </h2>
+   </div>
+}
+ReactDOM.render(<ProductList products={data} />, document.getElementById("app"));
+
+======
+
+
+
+
