@@ -992,11 +992,105 @@ r2("Anna");
  
  ===============
 
- 
+ Unit testing and E2E testing
+
+ * RTL ==> React Testing library for unit testing React component built on top of JEST
+ * Angular ==> ATB ==> Angular Test Bed built on top of Jasmine
+
+ getByXXX() ==> gets component or throws exception if not found
+ queryByXXX() ==> gets component or returns null if not found
+ findByXXX() ==> Promise based gets component
 
 
+queryByText(/customer application/i)
+
+ <input type="text" 
+            placeholder="search by name" 
+            onChange={(evt) => props.filterEvent(evt.target.value)} />
+
+querybyPlaceHolderText("search by name");
+
+// form elements
+getByRoleName("button");
+getAllByRoleName("button");
+getByRoleName("input");
+
+---
+low level dom accessor
+
+container.getElementById("id")
+container.querySelector('input[type=text]');
+
+=======================================
+
+one file is one test suite
+
+describe("test suite", () => {
+	it("test case 1", () => {
+
+	})
+	it("test case 2", () => {
+
+	})
+});
+
+test('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
+
+same as
+
+it('renders learn react link', () => {
+  render(<App />);
+  const linkElement = screen.getByText(/learn react/i);
+  expect(linkElement).toBeInTheDocument();
+});
 
 
+npm test
+
+npm test -- --coverage --watchAll
+
+=======================================
+
+
+App.test.js is more like integration testing
+render(<App />);
+App.js ==> CustomerList.js ==> Filter.js and # CustomerRow.js
+
+Testing in Isolation ==> unit testing ==> Mocking Api
+
+
+Enzyme library along with React instead of RTL
+
+shallow(<App/>); 
+mount(<App/>); 
+render(<App/>);
+
+===================================================
+
+Cypress end-to-end testing
+
+Protractor ==> Angular 
+
+===============
+
+yarn add -D cypress
+
+======================
+
+Day 4:
+
+npx create-react-app phoneapp
+* Router
+* ReactContext
+* styled-components
+* Bootstrap
+* Getting data from backend ==> RESTApi calls from React
+
+===============================================================
 
 
 
