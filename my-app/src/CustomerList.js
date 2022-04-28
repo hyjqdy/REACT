@@ -55,10 +55,22 @@ export default class CustomerList extends Component {
         return (
             <div>
                 {
-                    this.state.customers.map(c => <CustomerRow customer={c} key={c.id}/>)
+                    this.state.customers.map(c => <CustomerRow customer={c} key={c.id} delEvent={(id) => this.deleteCustomer(id)}/ >)
                 }
             </div>
         );
+    }
+
+    deleteCustomer(id) {
+        let custs = this.state.customers.filter(c => c.id !== id);
+        // state and props are immutable
+        // this.state.customers = custs; // wrong
+        // update the state ==> triggers reconcillation
+        this.setState({
+            customers:custs
+        }, () => console.log("deleted !!!"));
+
+        // don't expect data change result here this.state.customers might still show old data
     }
 }
 
