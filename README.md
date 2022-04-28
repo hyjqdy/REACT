@@ -928,12 +928,71 @@ class Welcome extends React.Component {
 ==========================================
 * create-react-app ==> scaffolding code for react application
 * for angular ng new ==> scaffolding code for angular application
+yarn create react-app my-app
+npx create-react-app my-app
 
 * Using Class Components for state and behaiour
 * Unit testing using RTL ==> React Testing Library [ built on JEST]
 * Cypress ==> for E2E
 
 =====================
+
+npm start
+yarn start
+
+"start": "react-scripts start"
+
+==> webpack serve --mode development ==> on port 3000
+
+
+function App() {
+  return <div className="App">
+       <h1>Customer Application</h1>
+    </div>
+}
+
+function App() {
+  return (
+    <div className="App">
+       <h1>Customer Application</h1>
+    </div>
+  );
+}
+
+===================================
+
+* state and props
+
+bind()
+
+var prod = {
+	"name": "iPhone";
+}
+
+var p = {
+	"name": "Smith",
+	"update": function(txt) {
+		this.name = txt;
+	}
+};
+
+
+p.update("Roger");
+
+let ref = p.update; //context is lost ==> doesn;t refer "this" to "p" rather it refers to "window"
+ref("Anna");
+
+let r2 = p.update.bind(prod);
+
+r2("Anna");
+
+ {/* <Filter filterEvent={(txt) => this.filterCustomers(txt)}/> */}
+ <Filter filterEvent={this.filterCustomers.bind(this)} />
+
+ 
+ ===============
+
+ 
 
 
 
