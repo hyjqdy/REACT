@@ -839,6 +839,106 @@ function Product({product}) {
 ReactDOM.render(<ProductList products={data} />, document.getElementById("app"));
 
 ======
+yarn create react-app my-app
+npx create-react-app my-app
+
+===========================
+
+Day 3
+
+npx create-react-app my-app
+or
+yarn create react-app my-app
+
+Recap:
+* webpack ==> JavaScript build tool [ production / development, Babel for transcompile, Css-loader & style-loader, HtmlWebPackPlugin]
+* React.js ==> View Library
+=> React.createElement() ==> document.createElement() ==> Dynmaically creating DOM elements
+
+Virtual DOM ==> like DOM in JSON format
+==> render() ==> reconcillation ==> UI DOM
+
+* react-dom
+* react-native
+* react-tv
+....
+
+* Functional Components
+	JavaScript functions which return JSX
+
+	Component.js
+	or
+	Component.jsx
+
+	babel converts the returned JSX into React.createElement()
+
+	function Component(props) {
+		return <div>
+				<h1>First</h1>
+				<p> {props.data} </p>
+		</div>
+	}
+
+	* props ==> data passed from parent to child
+
+
+	function Component({data}) {
+		return <div>
+				<h1>First</h1>
+				<p> {data} </p>
+		</div>
+	}
+
+	ProductList ==> Product
+
+* Recipe
+
+====================================
+
+State
+
+Object contains state and behaviour.
+
+* BankingAccount 
+	state ==> balance
+	credit(), debit() ==> behaviour
+
+* Button
+	color, size, caption ==> state
+	click(), mouseMove()
+
+Class Component
+
+class Welcome extends React.Component {
+ state = {
+   name : "George",
+   age: 32
+ } 
+
+ doTask() {
+
+ } 
+ render() {
+   return <div>
+     <h1>{this.state.name}, {this.state.age} </h1>
+    </div>
+ }
+}
+
+==========================================
+* create-react-app ==> scaffolding code for react application
+* for angular ng new ==> scaffolding code for angular application
+
+* Using Class Components for state and behaiour
+* Unit testing using RTL ==> React Testing Library [ built on JEST]
+* Cypress ==> for E2E
+
+=====================
+
+
+
+
+
 
 
 
