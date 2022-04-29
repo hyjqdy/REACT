@@ -1228,3 +1228,81 @@ return <>
 
 =============
 
+React 16: 
+	  <Switch>
+          
+        </Switch>
+
+
+React 17+:
+ <Routes>
+          
+ </Routes>
+
+ ==================
+
+ Optimization and Lazy loading feature has to used
+
+ ==
+
+ Context.js
+ index.js
+ ProductList.js
+ Product.js
+
+ =============
+
+Context.js
+
+increment = (id) => {
+	let prd = this.getItem(id);
+	prd.count++;
+	prd.total = prd.price * prd.count;
+
+	this.setState({
+		cart: this.state.cart // to take care or re-render
+	});
+}
+
+
+http://localhost:3000/cart
+Cart.js is rendered
+  based on number of products in Cart ==> CartList has to be rendered
+
+
+ CartList.js
+
+ return (
+ 		<div className="col-md-2">
+ 			<img src={img} style={{"width": "50px"}} />
+ 		</div>
+ 		<div className="col-md-2">
+ 				plus button
+ 		</div>
+ 		<div className="col-md-2">
+ 				minus button
+ 		</div>
+ 		<div className="col-md-2">
+ 				price
+ 		</div>
+ 		<div className="col-md-2">
+ 				count
+ 		</div>
+ 		<div className="col-md-2">
+ 				total
+ 		</div>
+
+ )
+
+ =========================
+
+RESTapi call 
+
+20 min of this application
+
+=====
+
+Advance React Concepts
+
+
+
