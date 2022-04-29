@@ -1193,5 +1193,38 @@ class App extends React.Component {
 	}
 }
 
-ReactDOM.render(<App/>, document.getElementById("app"))
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+========================================
+
+JSX needs only one root element
+
+return <div>
+	<h1>df</h1>
+	<h2>dgf</h2>
+	<p>df s</p>
+</div>
+
+solution:
+
+return <React.Fragment>
+			<h1>df</h1>
+			<h2>dgf</h2>
+			<p>df s</p>
+</React.Fragment>
+
+or
+
+return <>
+			<h1>df</h1>
+			<h2>dgf</h2>
+			<p>df s</p>
+</>
+
+===========================
+
+ <link href="https://fonts.googleapis.com/css?family=Oswald|Permanent+Marker&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+=============
 
