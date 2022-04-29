@@ -6,7 +6,8 @@ const ProductContext = React.createContext();
 
 class ProductProvider extends Component {
     state = {
-        products: []
+        products: [],
+        cart: []
     }
     // lifecycle method called after constructor
     componentDidMount() {
@@ -23,8 +24,28 @@ class ProductProvider extends Component {
         })
     }
 
+    getItem =(id) => {
+        let prd = this.state.products.filter(p => p.id === id) [0];
+        return prd;
+    }
+
+    addToCart = (id) => {
+        let prd = this.getItem(id);
+        prd.inCart = true;
+        prd.count = 1;
+        prd.total = prd.price;
+
+        let cartCopy = this.state.cart;
+        cartCopy.push(prd);
+        this.setState({
+            cart:cartCopy
+        }); 
+    }
+
+
     render(){
-        return <ProductContext.Provider value={{...this.state}}>
+        return <ProductContext.Provider value={{...this.state, 
+            addToCart: this.addToCart}}>
             {this.props.children}
         </ProductContext.Provider>
     }
