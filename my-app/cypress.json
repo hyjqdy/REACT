@@ -1,1 +1,5 @@
-{}
+{
+    "integrationFolder": "e2e",
+    "testFiles": "*.spec.js",
+    "baseUrl": "http://localhost:3000"
+}

@@ -1078,12 +1078,16 @@ Protractor ==> Angular
 ===============
 
 yarn add -D cypress
+npm i -D cypress @cypress/instrument-cra
+npm i bootstrap react-router-dom styled-components 
 
 ======================
 
 Day 4:
 
+yarn add -D cypress
 npx create-react-app phoneapp
+
 * Router
 * ReactContext
 * styled-components
