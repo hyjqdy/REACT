@@ -1096,7 +1096,102 @@ npx create-react-app phoneapp
 
 ===============================================================
 
+ "e2e": "cypress open"
+ 
+ npm start
+ npm run e2e
+
+ cypress.json
+ ==> cypress/integration folder for test specs
+modify this file to specify "baseUrl" and "testFiles", "view port related ", ...
+
+cypress / selenium / protractor ==> no need to go into framework relavant details [ handle dom]
+
+====================================
 
 
+npx create-react-app phoneapp
 
+yarn add bootstrap styled-components react-router-dom
+
+
+bootstrap is for RWD ==> Responsive Web design ==> grid system
+CSS ==> @media query
+* Grid system
+* navbar
+* card
+
+styled.button
+styled.p
+styled.div
+styled.h1
+
+SPA ==> Helps in SEO
+
+http://amazon.com/mobiles/iPhone
+
+
+http://localhost:3000
+http://localhost:3000/products
+http://localhost:3000/cart
+http://localhost:3000/products/1 ==> Details
+http://localhost:3000/dfs ==> Default
+
+
+* React Context
+
+let PersonContext = React.createContext();
+
+class PersonProvider extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      "name": "Asin",
+      "email": "someemail",
+      "update" : this.updateEmail.bind(this)
+    }
+  }
+  updateEmail(em) {
+    this.setState({
+      "email": em
+    })
+  }
+  render() {
+    return <PersonContext.Provider value={{...this.state}}>
+          {this.props.children}
+      </PersonContext.Provider>
+  }
+}
+
+function First() {
+  return <>
+    <h1> I am First <Second /> </h1>
+    </>
+}
+
+class Second extends React.Component {
+  render() {
+    return <PersonContext.Consumer>
+      {
+        value => {
+          return <>
+              Name: {value.name} <br />
+              Email : {value.email} <br />
+            <button onClick={() => value.update("me@gmail.com")} type="button">Change</button>
+            </>
+        }
+      }
+     </PersonContext.Consumer>
+  }
+}
+
+class App extends React.Component {
+	render() {
+		return <PersonProvider>
+			<First />
+		</PersonProvider>
+	}
+}
+
+ReactDOM.render(<App/>, document.getElementById("app"))
 
