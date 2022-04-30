@@ -1307,4 +1307,205 @@ Advance React Concepts
 ===================================
 
 
+Day 5
+
+* react-router-dom
+	BrowserRouter, Routes, Route, Link
+	Lazy loading Component ==> FCP React.lazy(), Suspense ==> fallback
+
+* bootstrap, font-awesome
+* styled-components ==> DOM elements and React Elements can apply CSS based on props
+* React Context ==> to avoid passing props thro intermediary components
+	=> Provider
+	=> Consumer
+
+Context.js ==> increment = (id) => {}
+Task: Cart.js and CartList.js
+
+==================
+
+Pending ==> Details.js ==> Functional Component Hooks
+
+React ==> RESTApi call to fetch JSON data
+* XmlHttpRequest
+* fetch
+* axios
+phoneapp>npm i axios
+Promise based HTTP client 
+
+phoneapp>npm i axios
+
+
+Fake RESTApi
+
+json-server
+JSON Server: Get a full fake REST API with zero coding in less than 30 seconds 
+
+data.json
+{
+    "customers": [],
+    "products": [],
+    "orders": []
+}
+
+npm i json-server -g
+json-server --port 1234 --watch data.json
+
+OR
+
+npx json-server --port 1234 --watch data.json
+
+http://localhost:1234/customers
+http://localhost:1234/products
+http://localhost:1234/products/3
+http://localhost:1234/products?company=apple
+http://localhost:1234/orders
+
+GET, POST, PUT and DELETE
+
+==============================
+
+* React Component Life-cycle
+
+Re-rendering of component ==> state or props change component re-renders
+
+class Child extends React.Component {
+  render() {
+    console.log("child renders");
+    return <h1>Child : {this.props.name} </h1>
+  }
+}
+
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment() {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  
+  render() {
+     console.log("parent renders");
+    return <>
+      Name : {this.state.name} <br />
+      Count: {this.state.count} <br />
+      <Child name={this.state.name} /> <br />
+      <button type="button" onClick={()=>this.increment()}>Inc</button>
+     </>
+  }
+}
+ReactDOM.render(<Parent/>, document.getElementById("app"))
+
+this.props.name !== nextProps.name
+
+================================
+Avoid re-rendiring of child class component:
+
+class Child extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return JSON.stringify(this.props) !== JSON.stringify(nextProps)    
+  }
+  render() {
+    console.log("child renders");
+    return <h1>Child : {this.props.name}  </h1>
+  }
+}
+
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment() {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  
+  render() {
+     console.log("parent renders");
+    return <>
+      Name : {this.state.name} <br />
+      Count: {this.state.count} <br />
+      <Child name={this.state.name}  /> <br />
+      <button type="button" onClick={()=>this.increment()}>Inc</button>
+     </>
+  }
+}
+ReactDOM.render(<Parent/>, document.getElementById("app"))
+
+===========================
+Avoid re-rendering of child class component:
+
+class Child extends React.PureComponent {
+  render() {
+    console.log("child renders");
+    return <h1>Child : {this.props.name}  </h1>
+  }
+}
+
+==============
+
+Avoid re-rendering of child functional component:
+
+function Child(props) {
+    console.log("child renders");
+    return <h1>Child : {props.name}  </h1>
+  }
+
+Memoization pattern
+
+let MemoChild = React.memo(Child); ===> HoC render() { if condition return; else Child()}
+
+Replace:
+ <Child name={this.state.name}  /> <br />
+with
+ <MemoChild name={this.state.name}  /> <br />
+
+===
+
+function Child(props) {
+    console.log("child renders");
+    return <h1>Child : {props.name}  </h1>
+}
+
+let MemoChild = React.memo(Child);
+
+class Parent extends React.Component {
+  state = {
+    count : 0,
+    name : "Banu"
+  }
+  increment() {
+    this.setState({
+      count: this.state.count + 1
+    })
+  }
+  
+  render() {
+     console.log("parent renders");
+    return <>
+      Name : {this.state.name} <br />
+      Count: {this.state.count} <br />
+      <MemoChild name={this.state.name}  /> <br />
+      <button type="button" onClick={()=>this.increment()}>Inc</button>
+     </>
+  }
+}
+ReactDOM.render(<Parent/>, document.getElementById("app"));
+
+
+Customize:
+
+function doCheck(prevProps, nextProps) {
+  console.log(prevProps, nextProps);
+  return true;
+}
+let MemoChild = React.memo(Child, doCheck);
+
+
+==================================
 

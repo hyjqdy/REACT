@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import axios  from 'axios';
 import {storeProducts} from './data';
 
 const ProductContext = React.createContext();
@@ -16,12 +16,24 @@ class ProductProvider extends Component {
 
     setProducts = () => {
         let prds = [];
-        storeProducts.forEach(p => {
-            prds.push({...p});
+        // storeProducts.forEach(p => {
+        //     prds.push({...p});
+        // });
+        // this.setState({
+        //     products:prds
+        // })
+        axios.get("http://localhost:1234/products")
+        .then(response => {
+            prds = response.data;
+            this.setState({
+                products: prds
+            })
         });
-        this.setState({
-            products:prds
-        })
+    }
+    checkout = () => {
+        axios.post("http://localhost:1234/orders", this.cart).then(res =>{
+            console.log("order placed!!")
+        });
     }
 
     getItem =(id) => {
