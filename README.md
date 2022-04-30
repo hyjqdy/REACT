@@ -1750,3 +1750,116 @@ export default function ProductList() {
 
 ====
 
+
+function Title() {
+  console.log('Rendering Title')
+  return (
+    <h2>
+      Example: Title
+    </h2>
+  )
+};
+
+const MemoTitle = React.memo(Title);
+
+function Button({ handleClick, children }) {
+  console.log('Rendering button - ', children)
+  return (
+    <button onClick={handleClick}>
+      {children}
+    </button>
+  )
+}
+
+const MemoButton = React.memo(Button);
+
+function Count({ text, count }) {
+	console.log(`Rendering ${text}`)
+	return <div>{text} - {count}</div>
+}
+
+const MemoCount = React.memo(Count);
+
+function ParentComponent() {
+	const [age, setAge] = React.useState(25)
+	const [salary, setSalary] = React.useState(50000)
+
+	 const incrementAge = () => {
+		setAge(age + 1)
+	};
+
+	const incrementSalary = () => {
+   		setSalary(salary + 1000)
+	}
+  
+	return (
+		<div>
+			<MemoTitle />
+			<MemoCount text="Age" count={age} />
+			<MemoButton handleClick={incrementAge}>Increment Age</MemoButton>
+			<MemoCount text="Salary" count={salary} />
+			<MemoButton handleClick={incrementSalary}>Increment Salary</MemoButton>
+		</div>
+	)
+}
+
+ReactDOM.render(<ParentComponent/>, document.getElementById("app"));
+
+
+===============================
+
+
+function App() {
+	let [state, dispatch] = React.useReducer(countReducer, intialState);
+	function increment() {
+  		let action = {"type": "INCREMENT", payload: 10};
+  		dispatch(action);
+  	}
+
+  	return <>
+  		Count: {state.count} <br />
+  		<button onClick={increment}>Inc</button>
+  	</>
+}
+ReactDOM.render(<App/>, document.getElementById("app"))
+
+
+Whenever state or props changes ==> functional Component is re-loaded
+
+===
+
+5) useCallback
+
+const incrementAge = React.useCallback(() => {
+		setAge(age + 1)
+	},[age]);
+
+const incrementSalary = React.useCallback(() => {
+   		setSalary(salary + 1000)
+}, [salary]);
+
+========================================
+
+Task:
+PhoneApp
+* useContext
+* useParams and complete Details.js
+
+import * as React from 'react';
+import { Routes, Route, useParams } from 'react-router-dom';
+
+function Details() {
+  // Get the userId param from the URL.
+  let { id } = useParams();
+  // ...
+}
+
+<Route path="/details/:id" element={<Details />} />
+
+==============================================================
+
+Resume on Monday ==> complete react pending and Redux
+
+
+  
+ 
