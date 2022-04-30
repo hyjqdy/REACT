@@ -1502,10 +1502,12 @@ Customize:
 
 function doCheck(prevProps, nextProps) {
   console.log(prevProps, nextProps);
-  return true;
+  return prevProps.name !== nextProps.name;
 }
 let MemoChild = React.memo(Child, doCheck);
 
 
-==================================
+=====================================
+
+Resume @ 11:00
 
