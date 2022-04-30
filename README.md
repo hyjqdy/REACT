@@ -1509,5 +1509,148 @@ let MemoChild = React.memo(Child, doCheck);
 
 =====================================
 
-Resume @ 11:00
+ErrorBoundary
+
+React 16 introduces a new concept of an “error boundary”.
+
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    logErrorToMyService(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+           return <h1>Something went wrong.</h1>;
+    }
+
+    return this.props.children; 
+  }
+}
+
+<App>
+<ErrorBoundary>
+		<A/>
+		<B/>
+</ErrorBoundary>
+
+<ErrorBoundary>
+		<C/>
+		<D/>
+		<E/>
+</ErrorBoundary>
+</App>
+
+===================================
+React hooks: ==> for functional components
+
+Hooks are a new addition in React 16.8
+They let you use state and other React features without writing a class.
+
+class components ==> state and behaviour for side effects, lifecycle methods
+		extends Component or extends PureComponent
+
+functional components ==> pure view components
+
+
+React Hooks:
+
+1) useState()
+can declare state variables in functional components
+
+function App() {
+	let [count, setCount] = React.useState(0);
+	let [user, setUser] = React.useState("Roger");
+	return <>
+		{count} {user} <br/ >
+	    <button onClick={()=>setCount(count + 1)}>Inc</button>
+	</> 
+}
+ReactDOM.render(<App/>, document.getElementById("app"))
+
+same as:
+
+class App extends Component {
+	state = {
+		count : 0,
+		user : "Roger"
+	}
+
+	setCount(c) {
+		this.setState({
+			count: c;
+		})
+	}
+
+	setUser(u) {
+		this.setState({
+			user: u;
+		})
+	}
+}
+
+2) useReducer
+		if state is complex and conditional mutation
+
+		"cart" contains products. each product has ==> id, count, price
+
+		actions:
+		"ADD_TO_CART"
+		"REMOVE_FROM_CART"
+		"CLEAR_CART"
+		"INCREMENT"
+
+	Action objects are of format 
+
+	{
+		type: "",
+		"payload": data
+	}
+
+	Example:
+
+	{
+		"type": "ADD_TO_CART",
+		"payload" : {id: 2, "count": 1, "name" : "pin"}
+	}
+
+Example:
+    let intialState = { count : 0};
+
+  let countReducer = (state, action) => {
+  	switch(action.type) {
+  		case "INCREMENT" : return {count : state.count + action.payload};
+  		case "DECREMENT" : return {count : state.count - 1};
+  		default : return state;
+  	}
+  }
+
+function App() {
+	let [state, dispatch] = React.useReducer(countReducer, intialState);
+	function increment() {
+  		let action = {"type": "INCREMENT", payload: 10};
+  		dispatch(action);
+  	}
+
+  	return <>
+  		Count: {state.count} <br />
+  		<button onClick={increment}>Inc</button>
+  	</>
+}
+ReactDOM.render(<App/>, document.getElementById("app"))
+
+
+=========
+
+
+
+
 
