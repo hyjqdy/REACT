@@ -42,10 +42,21 @@ class ProductProvider extends Component {
         }); 
     }
 
+    increment = (id) => {
+        let prd = this.getItem(id);
+        prd.count++;
+        prd.total = prd.price * prd.count;
+    
+        this.setState({
+            cart: this.state.cart // to take care or re-render
+        });
+    }
 
     render(){
         return <ProductContext.Provider value={{...this.state, 
-            addToCart: this.addToCart}}>
+            addToCart: this.addToCart,
+            increment: this.increment
+            }}>
             {this.props.children}
         </ProductContext.Provider>
     }
