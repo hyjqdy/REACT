@@ -1650,7 +1650,103 @@ ReactDOM.render(<App/>, document.getElementById("app"))
 
 =========
 
+ let someReducer = (state, action) => {
+ 	switch(action.type) {
+ 		case "X" : {...state, count: state.count +1 };
+ 	}
+
+=================================
+
+3) useEffect()
+	to simulate life cycle methods of React class component
 
 
+function App() {
+	let [count, setCount] = React.useState(0);
+	let [user, setUser] = React.useState("Roger");
 
+	// componentDidUpdate
+	React.useEffect(() => {
+		console.log("component did update, effect 1", count);
+	});
+ 
+
+	// componentDidMount
+	React.useEffect(() => {
+		console.log("component did mount, effect 2", count);
+	}, []);
+
+	// 
+	React.useEffect(() => {
+		console.log("component did mount, effect 3", count);
+	}, [user]);
+
+	function increment() {
+		setCount(count + 1);
+	}
+  	return <>
+  		Count: {count} <br />
+  		<button onClick={increment}>Inc</button>
+  	</>
+}
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+
+componentWillUnMount()
+React.useEffect(() => {
+    console.log("MOUNT", props);
+
+    return () => console.log("UNMOUNT", props)
+  }, []);
+
+================================
+
+4) useContext();
+
+is a react hook for context Consumer
+
+ProductList.js ==> Class Component
+import { Component } from "react";
+import { ProductConsumer } from "./Context";
+import Product from './Product';
+export default class ProductList extends Component {
+    render() {
+        return <div className="container">
+                <div className="row">
+                    <ProductConsumer>
+                        {
+                            value => {
+                                return value.products.map(p => <Product product={p} key={p.id}/>)
+                            }
+                        }
+                    </ProductConsumer>
+                </div>
+        </div>
+    }    
+}
+
+===
+ProductList.js ==> Functional Component
+
+import Product from './Product';
+import {ProductContext} from './Context';
+
+export default function ProductList() {
+  		let ProductContext = React.useContext(ProductContext); // get consumer
+  		let CustomerContext = React.useContext(CustomerContext);
+  		let {products} = ProductContext;
+  		let {user} = CustomerContext;
+        return <div className="container">
+                <div className="row">
+                  {user.name}
+                   {
+                          
+                      return products.map(p => <Product product={p} key={p.id}/>)
+                   }
+                   
+                </div>
+        </div>
+}
+
+====
 
