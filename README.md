@@ -2113,5 +2113,22 @@ function App() {
 
 
 ==============================================================
+ 
+State Management with Redux
 
+Redux: single store ==> store can have multiple state ==> Single source of truth
+
+Reducers:
+1) CustomerReducer
+2) ProductReducer
+3) CartReducer
+4) PaymentReducer
+
+single RootReducer per redux application
+
+RootReducer gets state from store and action dispatched from view; delegates them to all reducers
+
+
+
+====================
 
