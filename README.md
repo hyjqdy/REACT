@@ -1858,8 +1858,82 @@ function Details() {
 
 ==============================================================
 
-Resume on Monday ==> complete react pending and Redux
-
-
-  
+ Day 6
  
+ * React Context
+ ==> Provider and Consumer
+* Avoid re-rendering of child components
+1) Class Component => shouldComponentUpdate() / PureComponent
+2) Functional Component ==> React.memo(Component); or  React.memo(Component, applyCheck); 
+function applyCheck(prevProps, nextProps) {..}
+
+* ErrorBoundary => fallback component if exceptions are propagated from component
+
+ * React Hooks 16.8 version 
+ 1) useState() ==> state variable and mutation function ==> internally calls setState()
+ 2) useReducer() ==> state is complex; conditionally mutate the state "ADD_TO_CART", "REMOVE_FROM_CART", "CLEAR_CART"
+ 3) useEffect() ==> simulate Life-cycle methods like componentDidMount(), componentDidUpdate(),
+ 4) useContext() ==> ReactContext Consumer
+ 5) useCallback() ==> memoize callback function [ Avoid re-rendering]
+
+
+===
+
+Task 
+Details.js 
+6) useParams()
+
+Details.js
+* useParams()
+
+http://localhost:8080/details/5
+
+<Route path="/details/:id"> element={} />
+   
+Context ==> filter products
+
+API call to server from Details.js
+http://localhost:8080/details/32
+
+=======================================
+
+Details.js
+
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import axios from 'axios';
+
+export default function Details() {
+        let [product, setProduct] = useState(null);
+        let { id } = useParams();
+        
+        useEffect(() => {
+           console.log(id);
+           axios.get("http://localhost:1234/products/" + id).then( response => {
+            let prd = response.data;
+            if (prd !== null) {
+                if(!prd.img.startsWith("/"))
+                prd.img = "/" + prd.img;
+                setProduct(prd);
+             }
+        });
+        }, [id]);
+
+        if (product != null) {
+           let {title, img, price} = product;
+           return (
+              <div className="container">
+                 <h1>Name : {title}</h1>
+                 <h1>Price : {price}</h1>
+                 <img src={img} alt={name} />
+              </div>
+           )
+        } else {
+           return <div>Product doesn't exist</div>
+        }
+}
+
+
+==============
+
