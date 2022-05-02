@@ -2128,7 +2128,59 @@ single RootReducer per redux application
 
 RootReducer gets state from store and action dispatched from view; delegates them to all reducers
 
+========================
+
+npx create-react-app reduxexample
 
 
-====================
+reduxexample$ npm i redux react-redux
+
+---
+
+ActionTypes.js
+
+export const CREATE_NEW_CONTACT = "create_new_contact";
+export const REMOVE_CONTACT = "remove_contact";
+
+ActionCreators.js
+
+import {CREATE_NEW_CONTACT, REMOVE_CONTACT} from './ActionTypes';
+
+export const createContact = (contact) => {
+	return {
+		type: CREATE_NEW_CONTACT,
+		contact: contact
+	}
+}
+
+
+export const deleteContact = (email) => {
+	return {
+		type: REMOVE_CONTACT,
+		email: email
+	}
+}
+
+---
+
+ContactReducer.js
+
+import {CREATE_NEW_CONTACT, REMOVE_CONTACT} from './ActionTypes';
+
+export default (state = [], action) => {
+	switch(action.type) {
+		case CREATE_NEW_CONTACT:
+			return [
+				...state,
+				{...action.contact}
+			]
+		case REMOVE_CONTACT:
+			return state.filter(contact => contact.email !== action.email)
+		default:
+			return state;
+	}
+};
+
+
+=============
 
