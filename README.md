@@ -1932,8 +1932,186 @@ export default function Details() {
         } else {
            return <div>Product doesn't exist</div>
         }
+}:
+
+
+================
+
+Building Your Own Hooks: use existing hooks and create your own re-usable function
+
+ApiHook.js
+
+export function useApiCall(uri) {
+    const [data, setData] = React.useState(null);
+    const [done, isDone] = React.useState(false);
+
+    React.useEffect(() => {
+        // IIFE
+        (async () => {
+            let response = await fetch(url);
+            let retData = await response.json();
+            setData(retData);
+            isDone(true); 
+        })();
+    },[uri]);
+
+    return {
+        done,
+        data
+    }
+}
+
+---
+CustomHookComponent.js
+
+import { useApiCall } from "./ApiHook";
+
+export default function CustomHookComponent () {
+    let {done, data} = useApiCall("http://jsonplaceholder.typicode.com/users");
+    if(!done) return <h1> Loading .....</h1>
+    else {
+        return <>
+          {
+            data.map(user => <h2 key={user.id}>{user.name}</h2>)
+          }
+        </>
+    }
+
 }
 
 
-==============
+===
+
+useCacheState() CustomHook for useState()
+
+--> pull the state from localStorage rather than In-memory
+
+window.localStorage
+
+======================
+
+React Reference ==> references which can be assigned to any component
+
+emailRef = React.createRef(); // reference
+
+or
+
+emailRef = React.useRef(); // reference
+
+
+class App extends React.Component {
+  emailRef = React.createRef(); // reference 
+  render() {
+    return <>
+        <input type="text" ref={this.emailRef} />
+      <button onClick={() => this.doTask()}>Click</button>
+     </> 
+  }
+  doTask() {
+    console.log(this.emailRef.current.value);
+    this.emailRef.current.focus();
+  }
+}
+
+ReactDOM.render(<App/>, document.getElementById("app"));
+
+
+
+class Parent .. {
+	 emailRef = React.createRef(); // reference 
+
+	 ...
+	 <Child ref={this.emailRef} />
+
+}
+
+===
+
+ForwardRef
+
+https://reactjs.org/docs/forwarding-refs.html
+https://www.primefaces.org/primereact/datatable/filter/
+https://www.telerik.com/kendo-react-ui/
+
+========================================================
+
+HOF ==> high order functions are functions which accept a function / return a function
+
+HOC ==> High Order Component
+==> accept component and return a component
+
+React.memo() is a HOC
+
+const MemoTitle = React.memo(Title); ==> added conditional render() of component
+
+* to introduce props and behaviour
+* conditionaly return component 
+
+
+Building HOC:
+withCounter.js
+
+const withCounter = (WrappedComponent) => {
+	return class extends React.Component {
+		constructor(props) {
+			super(props);
+			this.state = {
+				count: 0
+			}
+		}
+
+		increment = () => {
+			this.setState({
+				count : this.state.count + 1
+			})
+		}
+
+		render() {
+			return <WrappedComponent count={this.state.count} increment={this.increment} />
+		}
+	}
+}
+
+class DivComponent extends React.Component {
+	return <>
+		Count {this.props.count} <br />
+		<button type="button" onClick={() => this.props.increment()}>Click</button>
+	</>
+}
+
+
+
+const DivWithCounter = withCounter(DivComponent);
+
+function App() {
+	return <DivWithCounter />
+}
+
+
+===
+
+HOC conditionally render
+
+withLoading = (WrappedComponent) => {
+..
+render() {
+			if(this.props.loading) {
+				return <h1>Loading!!!.</h1>
+			}
+			return <WrappedComponent />
+		}
+}
+
+const ProductListWithLoading = withLoading(ProductList);
+
+function App() {
+	...
+	return <>
+		<ProductListWithLoading loading={done} />
+	</>
+}
+
+
+==============================================================
+
 
