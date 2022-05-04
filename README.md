@@ -2186,4 +2186,141 @@ export default (state = [], action) => {
 
 Day 7
 
+Docker Desktop ==> MongoDB, ExpressJS connect to MongoDB
+
+Redux Middleware
+
+npx create-react-app reduxex2
+
+reduxex2$ npm i redux react-redux redux-thunk axios
+
+=====================
+
+
+Recap: 
+State Management using Redux ==> 3rd party library
+
+ReactContext for passing props to Consumer 
+
+REDUX_DEVTOOLS_EXTENSION ==> easy to debug redux state, action, diff, replay the events
+
+https://www.npmjs.com/package/redux-logger
+
+1. REDUX
+
+* Action object contains state and payload
+ {
+ 	type
+ 	payload
+ }
+
+* Action Creators are helper functions which take data from view and 
+returns an action object 
+
+* Action objects are dispathed to Redux Store from view component
+
+"GET_ITEMS"
+
+dispatch({type:"GET_ITEMS"});
+
+* store ==> place where state resided
+store is the one which intercepts action dispatched from view and delegates it to root-reducer
+
+* Reducer
+	functions which take the state from store and action dispatched from view
+	makes a copy of state
+	mutate the state
+	return the state
+	returned state is updated in the store
+
+
+2. REACT
+	react-redux
+
+	* compose ==> HOC ==> passes state and dispatch fns to Component
+
+	compose(
+		mapStateToProps,
+		mapDispatchToProps
+	)(App);
+
+	to the "App" component state and dispatch are injected as props
+
+==============================
+
+Redux Middleware
+https://redux.js.org/tutorials/fundamentals/part-6-async-logic
+
+Thunk is a subroutine ==> closure
+
+function thunk(arg) { ==> arg can be dispatch() or action object
+	if(arg === action) {
+
+		} else if (arg === fn) {
+			fn();
+		}
+}
+
+
+============================
+
+Redux Hooks instead of using compose();
+
+useSelector():
+The selector is approximately equivalent to the mapStateToProps argument to connect conceptually.
+
+useDispatch():
+This hook returns a reference to the dispatch function from the Redux store. ==> similar to mapDispatchToProps
+
+
+
+
+Redux Saga:
+
+built using ES6 Generators
+
+Normal fns have a single return value
+
+Generators can have multiple return values;
+
+function* fetchData() {
+	console.log("action 1");
+	console.log("action 2");
+	yield "data 1";
+	console.log("action 3");
+	yield 100;
+	console.log("action 4");
+	console.log("action 5");
+	yield "all good :-)"
+}
+
+let iter = fetchData();
+
+iter.next(); // data 1, done:false
+...
+iter.next(); // 100 
+...
+
+iter.next(); // all good
+
+iter.next(); // no value , done:true
+
+
+Aggregator
+
+Airbnb
+
+MMT
+	Flights
+	Hotels
+
+=========================================
+
+Resume in 15 min
+
+
+
+
+
+
 

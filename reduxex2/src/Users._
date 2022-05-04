@@ -1,5 +1,5 @@
 import {useSelector, useDispatch} from 'react-redux';
-import {FETCH_USERS_REQUEST} from './redux/Actions'; 
+import {fetchUsers} from './redux/thunk/thunkapi';
 
 import {useEffect} from 'react';
 export default function Users() {
@@ -9,12 +9,10 @@ export default function Users() {
     let {loading, error, users} = state;
 
     useEffect(() => {
-        dispatch({type: FETCH_USERS_REQUEST});
+        dispatch(fetchUsers());
     }, []);
 
     return <div>
-        <button type="button"
-        onClick={() => dispatch({type: FETCH_USERS_REQUEST})}>Refresh</button>
         {
             loading? <h1>Loading....</h1> : users.map(user => <h1 key={user.email}> {user.name}, {user.email}</h1>)
         }
