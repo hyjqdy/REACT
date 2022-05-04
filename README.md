@@ -2315,8 +2315,59 @@ MMT
 	Hotels
 
 =========================================
+Redux-Saga features:
 
-Resume in 15 min
+* Cancel previous request
+* debounce
+* concurrent requests [ all / race]
+
+
+====================================================================
+
+Softwares:
+ Docker desktop
+ Postman
+
+=========================
+
+MongoDB ==> NoSQL database
+
+docker run --name nokia-mongo -d mongo:latest -p 27017:27017
+
+
+Mongoose ==> ODM object data modeling to connect to mongodb from NodeJS/Express application
+
+Sequelize is a promise-based Node.js ORM tool for Postgres, MySQL, MariaDB, SQLite, DB2 and Microsoft SQL Server. 
+
+======================================
+
+RDBMS				MonogDB
+database 			database
+table 				collection
+
+
+MongoDB stores data in the form of BSON
+
+docker cp sales.json some-mongo:/tmp/sales.json
+
+docker exec -it some-mongo bash
+
+mongoimport --db sales_db --collection sales --drop --file tmp/sales.json
+
+mongosh
+
+can use : robo 3t for client
+
+> use sales_db
+
+sales_db> show collections
+sales
+
+sales_db> db.sales.find()
+sales_db> it
+
+----------------
+
 
 
 
