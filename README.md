@@ -2368,7 +2368,28 @@ sales_db> it
 
 ----------------
 
+NodeJS with MongoDB using mongoose ODM
 
+nodemongo> npm init --y
+nodemongo> npm i mongoose
+
+
+
+var SalesSchema = new Schema({
+    category: {
+    	type: String,
+    	required: [true, "Categroy is missing!!!"]
+    },
+    product: String,
+    sales: {
+    	type:Number,
+    	min: [10, 'Minimum sales should be 10'],
+    	max: 100
+    },
+    quarter: Number
+});
+
+=========
 
 
 
