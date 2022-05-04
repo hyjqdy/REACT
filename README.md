@@ -2184,7 +2184,6 @@ export default (state = [], action) => {
 
 =============
 
-Redux ==> Middleware
+Day 7
 
-ExpressJS
 
