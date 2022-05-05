@@ -50,7 +50,7 @@ mongoose.connect("mongodb://localhost:27017/sales_db")
         if(user) {
             const accessToken = jwt.sign({name:user.username, role: user.role}, accessTokenSecret, {expiresIn: '1m'});
             res.json(accessToken);
-        } {
+        } else {
             res.send("username or password not valid!!!");
         }
     });

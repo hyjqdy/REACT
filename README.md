@@ -7,7 +7,7 @@ Corporate Trainer,
 CO-FOUNDER: Lucida Technologies Pvt Ltd.,
 
 Email: 
-banu@lucidatechnologies.com; 
+
 banuprakashc@yahoo.co.in
 
 https://www.linkedin.com/in/banu-prakash-50416019/
@@ -2635,6 +2635,32 @@ GET:  http://localhost:5000/api/products
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGlhIiwicm9sZSI6Im1lbWJlciIsImlhdCI6MTY1MTczMDc4NSwiZXhwIjoxNjUxNzMwODQ1fQ.tJAmlvBA3S-27WmL5RR0y1lPBd9-GZ0-dML1eFZgEBM
 
+
+===
+
+node --inspect-brk index.js
+
+Open Chrome:
+in addressbar
+chrome://inspect
+
+===============================================
+
+* React ==> for client
+* Redux ==> State managment
+* Webpack ==> JS build tool and bundler for react
+* ExpressJS ==> Middleware framework to run on NodeJS for RESTful Web services or Traditional Web application]
+* MongoDB for persistence
+* Mongoose ODM driver to conenct Express <--> MongoDB
+
+React:
+npm run build
+
+build code can be deployed on any server instead of webpack-dev-server [ lite-server]
+
+Apache, NginX, IIS
+
+===========================================================
 
 
 
