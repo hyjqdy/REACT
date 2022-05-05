@@ -14,14 +14,14 @@ var SalesSchema = new Schema({
 
 const Sales = mongoose.model('Sale', SalesSchema); // maps to "sales" collection
 
-// http://localhost:8080/products
+// http://localhost:5000/api/products/
 router.get('/', function(req, res, next) {
    Sales.find({}, function(err, docs) {
         res.json(docs);
    });
 });
 
-// http://localhost:8080/products/Seafood
+// http://localhost:5000/api/products/Seafood
 router.get('/:category', function(req, res, next) {
     Sales.find({category:req.params.category}, function(err, docs) {
          res.json(docs);
@@ -30,7 +30,11 @@ router.get('/:category', function(req, res, next) {
 
  router.post('/', function(req, res, next) {
     Sales.create(req.body, function(err, docs) {
-         res.send("Product added!!!")
+         if(!err) {
+           res.send("Product added!!!");
+         } else {
+              res.send(err);
+         }
     });
  });
 

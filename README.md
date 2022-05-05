@@ -2391,6 +2391,58 @@ var SalesSchema = new Schema({
 
 =========
 
+http module
+
+const http = require('http');
+
+var server = http.createServer( (req,res) => {
+	if(uri == 1) {
+
+		} else if (uri is that) {
+
+			} else if (uri is somethingelse) {
+
+			}
+});
+
+server.listen(3000, ..);
+
+GET, POST, PUT, DELETE
+
+http://localhost:8080/products
+http://localhost:8080/login
+http://localhost:8080/logout
+http://localhost:8080/cart
+http://localhost:8080/details
+
+
+ExpressJS
+
+Express is a minimal and flexible Node.js web application framework 
+==> can build traditional web applications which serve presentation pages [ html / pdf / images] created dynamically
+* uses templates to render ==> EJS, PUG, JADE, Handlebars, Mustache, ..
+
+==> can be used to build RESTful APIs
+	serves data in various formats ==> JSON / XML / RSS / atom / CSV
+
+==> can be used to build GraphQL APIs
+	==> prevent overfetching of data or underfetching
+
+npm i express ejs
+
+=============================
+
+
+Day 8
+
+
+
+
+
+
+
+
+
 
 
 
