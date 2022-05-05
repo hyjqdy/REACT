@@ -2435,6 +2435,205 @@ npm i express ejs
 
 Day 8
 
+Recap:
+Thunk and Redux Saga ==> Redux middleware
+Redux can use sync actions
+
+* takeEvery
+* takeLatest
+* call() function call from generator
+* put() to invoke ACTIONs
+* all([saga1[], saga2()])
+* delay()
+
+ExpressJS
+Middleware Framework on NodeJS platform to build 
+* traditional web application ==> pages are served to client
+* RESTful APIs ==> serve JSON or any other representation of data to client
+* GraphQL APIs ==> integrated with ApolloServer
+
+
+RESTful web services
+1) client-server seperatation
+2) Uniform Resource URL
+	Nouns to identify resources [ products, customers, orders, ..]
+	Verbs ==> HTTP methods to perform CRUD operations 
+	GET ==> READ 
+	POST ==> CREATE
+	PUT ==> UPDATE
+	DELETE ==> DELETE
+
+	GET
+	http://localhost:8080/api/products
+
+	this has to fetch products
+
+	GET
+	http://localhost:8080/api/products/5
+
+	get product by id ==> 5
+
+	POST
+	http://localhost:8080/api/products
+	payload contains new product resource which needs to be added to "products"
+3) Stateless
+
+--
+
+MongoDB ==> NoSQL database is not a RDBMS
+
+NodeJS avoid RDBMS
+
+RDBMS ==> Spring / Spring Boot or ASP.Net with Razor, ...
+
+MongoDB database contains collections [table], collection contains documents [ row ]
+
+Mongoose is ODM ==> JS object mapped to MongoDB collection
+* Schema
+* Model ==> binds Schema to Mongodb collection
+Perform CRUD operations using Model
+
+===
+
+Http Headers:
+
+What type of representation is sent from server
+Accept: application/json
+
+What type is the payload
+Content-type: application/json
+
+body: ==> Raw
+{
+    "category" : "waste",
+    "product": "dummy",
+    "sales": 9999,
+    "quarter": 1
+}
+
+===========================
+
+ExpressJs can be configured with various view template
+* EJS
+* PUG
+* JADE
+* HandleBars
+* MustacheJS
+
+
+ "ejs": "^3.1.7",
+
+ <%= product.price %> similar to {product.price} in React
+
+
+
+PM2 is a daemon process manager that will help you manage and keep your application online 24/7
+
+==> run nodejs clusters
+
+NodeJS ==> one eventloop and a stack
+
+npm i -g pm2
+
+pm2 start index.js -i 0
+
+===========================
+
+
+Session Management
+
+HTTP protocol is a stateless protocol. Session Tracking is the ability to keep track of conversational state of client
+
+* Cookie
+	cookieexample.zip
+	extract
+	npm i
+
+=============================
+
+add session management to our express
+
+=======================
+State management has to be done by client [ Redux]
+
+JWT ==> JSON Web Token
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.
+SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+
+
+Header:
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+
+Payload:
+{
+  "sub": "1234567890",
+  "name": "John Doe",
+  "iat": 1516239022,
+  "iss": "nokia",
+  "authorities": "admin", "manager", "guest",
+  "exp" : 1516239044
+}
+
+
+HMACSHA256(
+  base64UrlEncode(header) + "." +
+  base64UrlEncode(payload),
+  topsecrect1235155
+) 
+
+
+=============================
+
+https://jwt.io/
+
+=========
+npm install jsonwebtoken
+
+POST: http://localhost:5000/login
+Acccept: text/plain
+Content-type: application/json
+
+Body: [raw]
+{
+    "username": "Lia",
+    "password": "test123"
+}
+
+Response:
+
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGlhIiwicm9sZSI6Im1lbWJlciIsImlhdCI6MTY1MTczMDc4NSwiZXhwIjoxNjUxNzMwODQ1fQ.tJAmlvBA3S-27WmL5RR0y1lPBd9-GZ0-dML1eFZgEBM"
+
+===
+
+const authenticateJWT = (req, res, next) => {
+    const authHeader = req.headers.authorization;
+    if(authHeader) {
+        const token = authHeader.split(' ')[1];
+        jwt.verify(token, accessTokenSecret, (err, user) => {
+            if(err) {
+                res.sendStatus(403);         
+            } else {
+                req.user = user;
+                next();
+            }
+        })
+    } else {
+        res.sendStatus(401); 
+    }
+}
+
+
+app.use("/api/products", authenticateJWT, products);
+
+
+GET:  http://localhost:5000/api/products
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGlhIiwicm9sZSI6Im1lbWJlciIsImlhdCI6MTY1MTczMDc4NSwiZXhwIjoxNjUxNzMwODQ1fQ.tJAmlvBA3S-27WmL5RR0y1lPBd9-GZ0-dML1eFZgEBM
 
 
 
